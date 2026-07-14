@@ -10,8 +10,9 @@ RUN a2enmod rewrite
 COPY . /var/www/html/
 
 # Make sure the uploads/images directories are writable by the web server
-RUN chown -R www-data:www-data /var/www/html/uploads /var/www/html/images \
-    && chmod -R 755 /var/www/html/uploads /var/www/html/images
+RUN mkdir -p /var/www/html/uploads /var/www/html/images \
+       && chown -R www-data:www-data /var/www/html/uploads /var/www/html/images \
+       && chmod -R 755 /var/www/html/uploads /var/www/html/images
 
 # Render provides the PORT env var; Apache needs to listen on it
 ENV APACHE_LISTEN_PORT=80
